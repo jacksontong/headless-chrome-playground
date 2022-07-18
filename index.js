@@ -8,9 +8,17 @@ app.use(express.json());
 
 app.post("/", async (req, res) => {
   const body = req.body;
+  const browserOptions = {
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  };
+
+  if (process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD === "true") {
+    browserOptions.executablePath = "/usr/bin/google-chrome";
+  }
 
   // instantiate browser
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch(browserOptions);
   const page = await browser.newPage();
 
   if (body.viewport) {

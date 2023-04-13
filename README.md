@@ -1,5 +1,7 @@
 # Puppeteer docker
 
+Headless Chrome for local development
+
 ```bash
 curl --location --request POST 'http://localhost:3000' \
 --header 'Content-Type: application/json' \
